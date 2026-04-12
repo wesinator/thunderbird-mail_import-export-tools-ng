@@ -62,12 +62,12 @@ export async function exportFolders(ctxEvent, tab, functionParams) {
       exportDir = await prefs.getPref("exportEML.dir");
     }
     if (usePredefinedExportDir && exportDir != "") {
-      console("use predefined exp folder", exportDir)
+      console.log("use predefined exp folder", exportDir)
       expTask.generalConfig.exportDirectory = exportDir;
     } else {
       let resultObj = await browser.ExportMessages.openFileDialog(Ci.nsIFilePicker.modeGetFolder, "Export Directory", "", Ci.nsIFilePicker.filterAll);
-      console("filedialog res", resultObj)
-      console("filedialog res fol", resultObj.folder)
+      console.log("filedialog res", resultObj)
+      console.log("filedialog res fol", resultObj.folder)
 
 
       if (resultObj.result != Ci.nsIFilePicker.returnOK) {

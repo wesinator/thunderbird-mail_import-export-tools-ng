@@ -116,33 +116,33 @@ var ExportMessages = class extends ExtensionCommon.ExtensionAPI {
 
         openFileDialog: async function (mode, title, initialDir, filter) {
 
-          console("filedialog mode", mode)
+          console.log("filedialog mode", mode)
 
           let winCtx = msgWindow;
           const tbVersion = getThunderbirdVersion();
           if (tbVersion.major >= 120) {
-          console("filedialog use bctx")
+          console.log("filedialog use bctx")
         
             winCtx = msgWindow.browsingContext;
           }
           let fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
           let resultObj = {};
           fp.init(winCtx, title, mode);
-          console("filedialog after init")
+          console.log("filedialog after init")
 
           fp.appendFilters(filter);
           if (initialDir) {
             fp.displayDirectory = self._getNsIFileFromPath(initialDir);
           }
           let res = await new Promise(resolve => {
-          console("filedialog bef open")
+          console.log("filedialog bef open")
 
             fp.open(resolve);
           });
-          console("filedialog res", res)
+          console.log("filedialog res", res)
 
           if (res !== Ci.nsIFilePicker.returnOK) {
-          console("filedialog ret res")
+          console.log("filedialog ret res")
 
             resultObj.result = res;
             return resultObj;
@@ -164,7 +164,7 @@ var ExportMessages = class extends ExtensionCommon.ExtensionAPI {
           resultObj.result = 0;
 
           if (mode === Ci.nsIFilePicker.modeGetFolder) {
-          console("filedialog mode folder", fp.file.path)
+          console.log("filedialog mode folder", fp.file.path)
 
             resultObj.folder = fp.file.path;
             console.log(resultObj);
