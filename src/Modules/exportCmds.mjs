@@ -18,6 +18,11 @@ var gAbort = false;
 export async function exportFolders(ctxEvent, tab, functionParams) {
   gAbort = false;
 
+  console.log("expf ctxevt", ctxEvent, functionParams)
+  console.log("expf ctxevt sel folder", ctxEvent.selectedFolder)
+  console.log("expf ctxevt sel folder[0]", ctxEvent.selectedFolders[0])
+
+
   try {
     logging.init({ logTypes: await prefs.getPref("debug.logTypes") });
 
@@ -57,9 +62,14 @@ export async function exportFolders(ctxEvent, tab, functionParams) {
       exportDir = await prefs.getPref("exportEML.dir");
     }
     if (usePredefinedExportDir && exportDir != "") {
+      console("use predefined exp folder", exportDir)
       expTask.generalConfig.exportDirectory = exportDir;
     } else {
       let resultObj = await browser.ExportMessages.openFileDialog(Ci.nsIFilePicker.modeGetFolder, "Export Directory", "", Ci.nsIFilePicker.filterAll);
+      console("filedialog res", resultObj)
+      console("filedialog res fol", resultObj.folder)
+
+
       if (resultObj.result != Ci.nsIFilePicker.returnOK) {
         return;
       }

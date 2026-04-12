@@ -1568,9 +1568,8 @@ async function invalidSelection() {
 // update for attachment menu based on eml type
 // update for store type, attachments, page type
 async function menusUpdate(info, tab) {
-
-  //console.log(info)
-
+  console.log("menusUpdate")
+  console.dir(info, {depth: null})
   // toggle copyToClipboard visibility
   // toggle msgCtx visibility - #459
   if (info.contexts.includes("page")) {
@@ -1601,6 +1600,10 @@ async function menusUpdate(info, tab) {
   var folderPath;
   var accountId;
   var accountType;
+
+  console.log("selected account", info.selectedAccount)
+  console.log("selected folder", info.selectedFolder)
+  console.log("selected folders", info.selectedFolders)
 
   if (info.selectedAccount) {
     accountId = info.selectedAccount.id;
